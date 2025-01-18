@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import yagmail
 
 # 景品リスト
 prizes = ["Prize A", "Prize B", "Prize C", "Prize D"]
@@ -50,3 +51,17 @@ results_df = pd.DataFrame(
     {"Prize": list(st.session_state.votes.keys()), "Votes": list(st.session_state.votes.values())}
 )
 st.table(results_df)
+
+# メール送信
+admin_email = st.text_input("Enter admin email to send results:")
+if st.button("Send Results to Admin"):
+    try:
+        yag = yagmail.SMTP("your_email@example.com", "your_password")  # 自分のメールアドレスとパスワード
+        yag.send(
+            to=admin_email,
+            subject="Raffle Voting Results",
+            contents=results_df.to_csv(index=False),
+        )
+        st.success(f"Results sent to {admin_email} successfully!")
+    except Exception as e:
+        st.error(f"Failed to send email: {e}")
