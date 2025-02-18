@@ -6,8 +6,8 @@ from email.mime.multipart import MIMEMultipart
 import os
 
 # 環境変数からGmailアカウント情報を取得
-GMAIL_USER = os.getenv("oceanbliss@2411@gmail.com")
-GMAIL_PASSWORD = os.getenv("0430Jagp!")
+GMAIL_USER = os.getenv("")
+GMAIL_PASSWORD = os.getenv("")
 
 # 景品リスト
 prizes = ["Prize A", "Prize B", "Prize C", "Prize D"]
